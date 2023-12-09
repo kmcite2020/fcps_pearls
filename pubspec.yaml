@@ -1,0 +1,39 @@
+name: fcps_pearls
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+
+dependencies:
+  colornames: ^0.1.0
+  copy_with_extension: ^5.0.4
+  copy_with_extension_gen: ^5.0.4
+  flex_color_scheme: ^7.3.1
+  flutter:
+    sdk: flutter
+  freezed_annotation: ^2.4.1
+  hive_flutter: ^1.1.0
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  json_annotation: ^4.8.1
+  path_provider: ^2.1.1
+  states_rebuilder: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  freezed: ^2.4.5
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
+  isar_generator: ^3.1.0+1
+  analyzer: ^5.13.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - shorebird.yaml

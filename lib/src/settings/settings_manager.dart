@@ -1,30 +1,25 @@
 import 'dart:convert';
 
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
-// part 'settings_manager.freezed.dart';
+part 'settings_manager.freezed.dart';
 part 'settings_manager.g.dart';
 
-@JsonSerializable()
-@CopyWith()
-class Settings {
-  final ThemeMode themeMode;
-  final double borderRadius;
-  final double padding;
-  @MaterialColorConverter()
-  final MaterialColor materialColor;
-  const Settings({
-    this.themeMode = ThemeMode.system,
-    this.materialColor = Colors.blueGrey,
-    this.borderRadius = 8,
-    this.padding = 6,
-  });
+@freezed
+class Settings with _$Settings {
+  const factory Settings({
+    @Default(ThemeMode.system) final ThemeMode themeMode,
+    @Default(8) final double borderRadius,
+    @Default(8) final double padding,
+    @Default(Colors.red)
+    @MaterialColorConverter()
+    final MaterialColor materialColor,
+  }) = _Settings;
 
-  factory Settings.fromJson(json) => _$SettingsFromJson(json);
-  toJson() => _$SettingsToJson(this);
+  factory Settings.fromJson(Map<String, dynamic> json) =>
+      _$SettingsFromJson(json);
 }
 
 final class MaterialColorConverter
@@ -51,11 +46,7 @@ class SettingsManager {
   Settings get settings => settingsRM.state;
   set settings(Settings _) => settingsRM.state = _;
 
-  void setThemeMode(_) {
-    settings = settings.copyWith(themeMode: _);
-  }
+  void setThemeMode(_) => settings = settings.copyWith(themeMode: _);
 
-  void setMaterialColor(_) {
-    settings = settings.copyWith(materialColor: _);
-  }
+  void setMaterialColor(_) => settings = settings.copyWith(materialColor: _);
 }

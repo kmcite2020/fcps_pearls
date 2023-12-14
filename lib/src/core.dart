@@ -2,23 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fcps_pearls/src/settings/settings_manager.dart';
-import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:uuid/uuid.dart';
+
+String get randomID => Uuid().v8();
 
 final navigator = RM.navigate;
 
 final directoryRM = RM.injectFuture(getApplicationDocumentsDirectory);
 Directory get directory => directoryRM.state;
-
-Isar get isar => isarRM.state;
-final isarRM = RM.inject(
-  () => Isar.openSync(
-    [],
-    directory: directory.path,
-  ),
-);
 
 extension ObjectExtensions on Object? {
   Widget text({double? scale}) {
@@ -48,7 +42,7 @@ class HiveStorage implements IPersistStore {
   @override
   Future<void> init() async {
     await Hive.initFlutter();
-    box = await Hive.openBox('project_pearls');
+    box = await Hive.openBox('pearls');
   }
 
   @override

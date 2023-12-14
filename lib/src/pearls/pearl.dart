@@ -1,50 +1,57 @@
-import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:fcps_pearls/src/core.dart';
-import 'package:isar/isar.dart';
+import 'dart:convert';
+
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
+part 'pearl.freezed.dart';
 part 'pearl.g.dart';
 
-final pearlsRepository = PearlsRepository();
+final pearlsManager = PearlsManager();
 
-class PearlsRepository {
-  Stream<List<Pearl>> watchPearls() => isar.txnSync(
-        () => isar.pearls.where().watch(fireImmediately: true),
-      );
+class PearlsManager {
+  final pearlsRM = RM.inject(
+    Pearls.new,
+    persist: () => PersistState(
+      key: 'pearls',
+      fromJson: (json) => Pearls.fromJson(jsonDecode(json)),
+      toJson: (s) => jsonEncode(s),
+    ),
+  );
+  Pearls get pearls => pearlsRM.state;
+  set pearls(Pearls _) => pearlsRM.state = _;
+  List<Pearl> get listOfPearls => pearls.pearlsCache;
+  set listOfPearls(List<Pearl> _) => pearls = pearls.copyWith(pearlsCache: _);
+
+  void addPearl(Pearl pearl) {
+    listOfPearls = List.of(listOfPearls)..add(pearl);
+  }
+
+  void removePearl(Pearl pearl) {
+    listOfPearls = List.of(listOfPearls)..remove(pearl);
+  }
+
+  Pearl pearl(String id) =>
+      listOfPearls.firstWhere((element) => element.id == id);
 }
 
-List<Pearl> get pearls => pearlsRM.state;
+@freezed
+class Pearl with _$Pearl {
+  const factory Pearl({
+    @Default('') final String id,
+    @Default('') final String statement,
+    @Default('') final String answer,
+    @Default('') final String explaination,
+  }) = _Pearl;
 
-final pearlsRM = RM.injectStream(
-  pearlsRepository.watchPearls,
-  initialState: <Pearl>[],
-);
-
-@Collection()
-class Pearl {
-  Pearl();
-  Id id = Isar.autoIncrement;
-  String statement = '';
-  String answer = '';
-  String explaination = '';
-
-  factory Pearl.get(int id) => pearls.firstWhere((element) => element.id == id);
+  factory Pearl.fromJson(json) => _$PearlFromJson(json);
+  factory Pearl.pearl(String id) => pearlsManager.pearl(id);
 }
 
-Map<int, Pearl> generatePearlMap([int count = 20]) => {
-      for (final eachPearl in List.generate(
-        count,
-        (i) {
-          String statement = 'Statement $i';
-          String answer = 'Answer $i';
-          String explaination = 'Explaination $i';
+@freezed
+class Pearls with _$Pearls {
+  const factory Pearls({
+    @Default(<Pearl>[]) final List<Pearl> pearlsCache,
+  }) = _Pearls;
 
-          return Pearl()
-            ..id = i
-            ..statement = statement
-            ..answer = answer
-            ..explaination = explaination;
-        },
-      ))
-        eachPearl.id: eachPearl,
-    };
+  factory Pearls.fromJson(json) => _$PearlsFromJson(json);
+}

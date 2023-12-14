@@ -7,6 +7,7 @@ import 'src/core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await RM.storageInitializer(HiveStorage());
+  await directoryRM.initializeState();
+  // await isarRM.initializeState();
   runApp(const MyApp());
 }
-

@@ -1,9 +1,12 @@
+import 'package:fcps_pearls/src/add_content_page.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:fcps_pearls/src/pearls/pearls.dart';
+import 'package:fcps_pearls/src/pearls/pages/pearls.dart';
 import 'package:fcps_pearls/src/settings/settings_page.dart';
 import 'core.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
+import 'pearls/pages/edit_pearls.dart';
+import 'pearls/pages/study_pearls.dart';
 import 'settings/settings_manager.dart';
 
 class MyApp extends ReactiveStatelessWidget {
@@ -44,8 +47,10 @@ class MyApp extends ReactiveStatelessWidget {
           index: _index,
           children: const [
             PearlsPage(),
-            StudyPearls(),
+            StudyPearlsPage(),
             SettingsPage(),
+            AddPearlPage(),
+            EditPearlsPage(),
           ],
         ),
       ),
@@ -79,6 +84,18 @@ class MyDrawer extends ReactiveStatelessWidget {
             icon: const Icon(Icons.settings),
             label: 'Settings'.text(),
           ),
+          SizedBox(height: 8),
+          Divider(),
+          SizedBox(height: 8),
+          NavigationDrawerDestination(
+            icon: const Icon(Icons.assessment),
+            label: 'Add Pearl Page'.text(),
+          ),
+          SizedBox(height: 8),
+          NavigationDrawerDestination(
+            icon: const Icon(Icons.edit_document),
+            label: 'Edit Pearls'.text(),
+          ),
         ],
       ),
     );
@@ -87,7 +104,7 @@ class MyDrawer extends ReactiveStatelessWidget {
 
 final _indexRM = RM.inject<int>(
   () => 0,
-  sideEffects: SideEffects(onSetState: (_) => RM.navigate.back()),
+  sideEffects: SideEffects(onSetState: (_) => navigator.back()),
 );
 int get _index => _indexRM.state;
 void _setIndex(int i) => _indexRM.state = i;

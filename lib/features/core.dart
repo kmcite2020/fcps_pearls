@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fcps_pearls/src/settings/settings_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
+
+import 'settings/settings.dart';
 
 String get randomID => Uuid().v8();
 
@@ -25,7 +26,7 @@ extension ObjectExtensions on Object? {
 
 extension WidgetExtensions on Widget {
   Widget pad({EdgeInsets? padding}) => Padding(
-        padding: padding ?? EdgeInsets.all(settingsManager.settings.padding),
+        padding: padding ?? EdgeInsets.all(settings.padding),
         child: this,
       );
   Widget center() => Center(child: this);

@@ -1,14 +1,15 @@
 import 'dart:convert';
 
+import 'package:fcps_pearls/main.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
-part 'settings_manager.freezed.dart';
-part 'settings_manager.g.dart';
+part 'settings.freezed.dart';
+part 'settings.g.dart';
 
 @freezed
-class Settings with _$Settings {
+class Settings with _$Settings implements Model<Settings> {
   const factory Settings({
     @Default(ThemeMode.system) final ThemeMode themeMode,
     @Default(8) final double borderRadius,
@@ -20,6 +21,11 @@ class Settings with _$Settings {
 
   factory Settings.fromJson(Map<String, dynamic> json) =>
       _$SettingsFromJson(json);
+
+  const Settings._();
+  @override
+  Settings call([Settings? _settings]) =>
+      _settings != null ? settings = _settings : settings;
 }
 
 final class MaterialColorConverter
@@ -32,21 +38,17 @@ final class MaterialColorConverter
   int toJson(MaterialColor object) => Colors.primaries.indexOf(object);
 }
 
-final SettingsManager settingsManager = SettingsManager();
-
-class SettingsManager {
-  final settingsRM = RM.inject(
-    () => const Settings(),
-    persist: () => PersistState(
-      key: 'settings',
-      toJson: (s) => jsonEncode(s),
-      fromJson: (json) => Settings.fromJson(jsonDecode(json)),
-    ),
-  );
-  Settings get settings => settingsRM.state;
-  set settings(Settings _) => settingsRM.state = _;
-
-  void setThemeMode(_) => settings = settings.copyWith(themeMode: _);
-
-  void setMaterialColor(_) => settings = settings.copyWith(materialColor: _);
-}
+final settingsRM = RM.inject(
+  () => const Settings(),
+  persist: () => PersistState(
+    key: 'settings',
+    toJson: (s) => jsonEncode(s),
+    fromJson: (json) => Settings.fromJson(jsonDecode(json)),
+  ),
+);
+Settings get settings => settingsRM.state;
+set settings(Settings _) => settingsRM.state = _;
+ThemeMode get themeMode => settings.themeMode;
+MaterialColor get materialColor => settings.materialColor;
+set themeMode(_) => settings(settings.copyWith(themeMode: _));
+set materialColor(_) => settings(settings.copyWith(materialColor: _));

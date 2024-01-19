@@ -1,10 +1,6 @@
-import 'package:fcps_pearls/src/core.dart';
-import 'package:fcps_pearls/src/pearls/pearl.dart';
-import 'package:fcps_pearls/src/pearls/pearl_details.dart';
-import 'package:flutter/material.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
+import '../../../main.dart';
 
-class PearlDetailsPage extends ReactiveStatelessWidget {
+class PearlDetailsPage extends StatelessWidget {
   final String id;
   const PearlDetailsPage({
     super.key,
@@ -13,9 +9,8 @@ class PearlDetailsPage extends ReactiveStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PearlManager pearlManager = PearlManager()..call(id);
-
-    final Pearl pearl = pearlManager.pearl;
+    // final PearlManager pearlManager = PearlManager()..call(id);
+    // final Pearl pearl = pearlManager.pearl;
     return Material(
       child: CustomScrollView(
         slivers: [
@@ -24,7 +19,7 @@ class PearlDetailsPage extends ReactiveStatelessWidget {
               ),
           SliverList.list(
             children: [
-              pearl.statement.text(scale: 2).pad(),
+              // pearl.statement.text(scale: 2).pad(),
               SizedBox(height: 8),
               ElevatedButton.icon(
                 onPressed: toggleAnswerShown,
@@ -35,7 +30,7 @@ class PearlDetailsPage extends ReactiveStatelessWidget {
               ).pad(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               ),
-              if (answerShown) pearl.answer.text(scale: 2).pad(),
+              // if (answerShown) pearl.answer.text(scale: 2).pad(),
               ElevatedButton.icon(
                 onPressed: toggleExplainatonShown,
                 icon: Icon(
@@ -44,7 +39,7 @@ class PearlDetailsPage extends ReactiveStatelessWidget {
                     ? 'Hide Explaination'.text()
                     : 'Show Explaination'.text(),
               ).pad(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4)),
-              if (explainatonShown) pearl.explaination.text(scale: 2).pad(),
+              // if (explainatonShown) pearl.explaination.text(scale: 2).pad(),
             ],
           ),
         ],

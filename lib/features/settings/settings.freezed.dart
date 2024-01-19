@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'settings_manager.dart';
+part of 'settings.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -137,12 +137,13 @@ class __$$SettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SettingsImpl implements _Settings {
+class _$SettingsImpl extends _Settings {
   const _$SettingsImpl(
       {this.themeMode = ThemeMode.system,
       this.borderRadius = 8,
       this.padding = 8,
-      @MaterialColorConverter() this.materialColor = Colors.red});
+      @MaterialColorConverter() this.materialColor = Colors.red})
+      : super._();
 
   factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsImplFromJson(json);
@@ -199,13 +200,14 @@ class _$SettingsImpl implements _Settings {
   }
 }
 
-abstract class _Settings implements Settings {
+abstract class _Settings extends Settings {
   const factory _Settings(
           {final ThemeMode themeMode,
           final double borderRadius,
           final double padding,
           @MaterialColorConverter() final MaterialColor materialColor}) =
       _$SettingsImpl;
+  const _Settings._() : super._();
 
   factory _Settings.fromJson(Map<String, dynamic> json) =
       _$SettingsImpl.fromJson;

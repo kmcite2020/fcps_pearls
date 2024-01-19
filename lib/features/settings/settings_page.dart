@@ -1,16 +1,14 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:colornames/colornames.dart';
-import 'package:fcps_pearls/src/pearls/pearl.dart';
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/scr/state_management/rm.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 import '../core.dart';
-import 'settings_manager.dart';
+import 'settings.dart';
 
-class SettingsPage extends ReactiveStatelessWidget {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
@@ -23,7 +21,7 @@ class SettingsPage extends ReactiveStatelessWidget {
         SliverList.list(
           children: [
             DropdownButtonFormField(
-              value: settingsManager.settings.themeMode,
+              value: themeMode,
               items: ThemeMode.values
                   .map(
                     (eachThemeMode) => DropdownMenuItem(
@@ -32,10 +30,10 @@ class SettingsPage extends ReactiveStatelessWidget {
                     ),
                   )
                   .toList(),
-              onChanged: settingsManager.setThemeMode,
+              onChanged: (_) => themeMode = _,
             ).pad(),
             DropdownButtonFormField(
-              value: settingsManager.settings.materialColor,
+              value: materialColor,
               items: Colors.primaries.map(
                 (eachMaterialColor) {
                   return DropdownMenuItem(
@@ -44,7 +42,7 @@ class SettingsPage extends ReactiveStatelessWidget {
                   );
                 },
               ).toList(),
-              onChanged: settingsManager.setMaterialColor,
+              onChanged: (_) => materialColor = _,
             ).pad(),
             ElevatedButton(
               onPressed: () async {
@@ -76,19 +74,19 @@ class PearlsToJsonExporter {
     ),
   );
   void exportToJson() {
-    final Pearls pearls = pearlsManager.pearls;
-    final json = jsonEncode(pearls);
-    final now = DateTime.now();
-    final fileToStore = File(directory.path + '\\' + '${now.year}' + '.json');
-    fileToStore.writeAsStringSync(json);
-    backupRM.state = fileToStore;
+    // final Pearls pearls = pearlsManager.pearls;
+    // final json = jsonEncode(pearls);
+    // final now = DateTime.now();
+    // final fileToStore = File(directory.path + '\\' + '${now.year}' + '.json');
+    // fileToStore.writeAsStringSync(json);
+    // backupRM.state = fileToStore;
   }
 
   void importFromJson() async {
-    final file = backupRM.state;
-    final json = await file.readAsString();
-    final jsonMap = jsonDecode(json);
-    final Pearls pearls = Pearls.fromJson(jsonMap);
-    pearlsManager.pearls = pearls;
+    // final file = backupRM.state;
+    // final json = await file.readAsString();
+    // final jsonMap = jsonDecode(json);
+    // final Pearls pearls = Pearls.fromJson(jsonMap);
+    // pearlsManager.pearls = pearls;
   }
 }

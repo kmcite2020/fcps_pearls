@@ -1,46 +1,49 @@
-import 'package:fcps_pearls/src/add_content_page.dart';
+import 'package:fcps_pearls/main.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:fcps_pearls/src/pearls/pages/pearls.dart';
-import 'package:fcps_pearls/src/settings/settings_page.dart';
+import 'package:signals/signals_flutter.dart';
+import 'add_content_page.dart';
 import 'core.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'pearls/pages/edit_pearls.dart';
+import 'pearls/pages/pearls.dart';
 import 'pearls/pages/study_pearls.dart';
-import 'settings/settings_manager.dart';
+import 'settings/settings.dart';
+import 'settings/settings_page.dart';
 
-class MyApp extends ReactiveStatelessWidget {
-  const MyApp({super.key});
+class App extends UI {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final _index = _indexRM.watch(context);
     return MaterialApp(
       navigatorKey: RM.navigate.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: FlexThemeData.light(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: settingsManager.settings.materialColor,
+          primarySwatch: materialColor,
         ),
         subThemesData: FlexSubThemesData(
-          defaultRadius: settingsManager.settings.borderRadius,
+          defaultRadius: settings.borderRadius,
         ),
         lightIsWhite: true,
         appBarStyle: FlexAppBarStyle.primary,
       ),
       darkTheme: FlexThemeData.dark(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: settingsManager.settings.materialColor,
+          primarySwatch: materialColor,
           brightness: Brightness.dark,
         ),
         subThemesData: FlexSubThemesData(
-          defaultRadius: settingsManager.settings.borderRadius,
+          defaultRadius: settings.borderRadius,
         ),
         useMaterial3: true,
         darkIsTrueBlack: true,
         appBarStyle: FlexAppBarStyle.primary,
       ),
-      themeMode: settingsManager.settings.themeMode,
+      themeMode: themeMode,
       home: Scaffold(
         drawer: const MyDrawer(),
         body: IndexedStack(
@@ -63,6 +66,7 @@ class MyDrawer extends ReactiveStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _index = _indexRM.watch(context);
     return Drawer(
       child: NavigationDrawer(
         onDestinationSelected: _setIndex,
@@ -102,9 +106,8 @@ class MyDrawer extends ReactiveStatelessWidget {
   }
 }
 
-final _indexRM = RM.inject<int>(
-  () => 0,
-  sideEffects: SideEffects(onSetState: (_) => navigator.back()),
-);
-int get _index => _indexRM.state;
-void _setIndex(int i) => _indexRM.state = i;
+final _indexRM = signal(0);
+void _setIndex(int i) {
+  _indexRM.set(i);
+  navigator.back();
+}

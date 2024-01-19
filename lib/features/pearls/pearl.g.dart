@@ -22,13 +22,15 @@ Map<String, dynamic> _$$PearlImplToJson(_$PearlImpl instance) =>
     };
 
 _$PearlsImpl _$$PearlsImplFromJson(Map<String, dynamic> json) => _$PearlsImpl(
-      pearlsCache: (json['pearlsCache'] as List<dynamic>?)
-              ?.map(Pearl.fromJson)
-              .toList() ??
-          const <Pearl>[],
+      pearlsCache: (json['pearlsCache'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, Pearl.fromJson(e)),
+          ) ??
+          const <String, Pearl>{},
+      loading: json['loading'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$PearlsImplToJson(_$PearlsImpl instance) =>
     <String, dynamic>{
       'pearlsCache': instance.pearlsCache,
+      'loading': instance.loading,
     };

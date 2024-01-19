@@ -1,11 +1,6 @@
-import 'package:fcps_pearls/src/app.dart';
-import 'package:flutter/material.dart';
-import 'package:fcps_pearls/src/core.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
+import '../main.dart';
 
-import 'pearls/pearl.dart';
-
-class AddPearlPage extends ReactiveStatelessWidget {
+class AddPearlPage extends UI {
   static final pearlRM = RM.inject(Pearl.new);
   static Pearl get pearl => pearlRM.state;
   static void setPearl(Pearl _) => pearlRM.state = _;
@@ -53,13 +48,7 @@ class AddPearlPage extends ReactiveStatelessWidget {
           ).pad(),
           ElevatedButton(
             onPressed: () {
-              // pearlsManager.addPearl(
-              //   (_) => pearl..id = pearls.length,
-              // );
-              // setPearl(Pearl()); // to clear the state to defaults
-              // navigator.back();
-
-              pearlsManager.addPearl(pearl);
+              // pearlsManager.addPearl(pearl);
               setPearl(Pearl());
             },
             child: 'Save Pearl'.text(),

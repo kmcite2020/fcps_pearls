@@ -36,15 +36,18 @@ class PearlsRM {
     loading();
     call(pearls.copyWith(pearlsCache: Map.of(mapOfPearls)..[pearl.id] = pearl));
     success();
-    // exportToFile();
   }
 
   void removePearl(Pearl pearl) {
+    loading();
     call(pearls.copyWith(pearlsCache: Map.of(mapOfPearls)..remove(pearl.id)));
+    success();
   }
 
   void removeAllPearls() {
+    loading();
     call(pearls.copyWith(pearlsCache: {}));
+    success();
   }
 
   void loading() {
@@ -54,26 +57,6 @@ class PearlsRM {
   void success() {
     call(pearls.copyWith(loading: false));
   }
-
-  // void exportToFile() async {
-  //   loading();
-  //   final json = call().toJson();
-  //   final str = jsonEncode(json);
-  //   final string = File('path');
-  //   await Future.delayed(20.milliseconds);
-  //   success();
-  //   string.writeAsStringSync(str);
-  // }
-
-  // Pearls importFromFile() {
-  //   loading();
-  //   final string = File('path');
-  //   final json = jsonDecode(string.readAsStringSync());
-  //   final pearls = Pearls.fromJson(json);
-  //   print(pearls);
-  //   success();
-  //   return pearls;
-  // }
 }
 
 @freezed
@@ -82,11 +65,10 @@ class Pearl with _$Pearl {
     @Default('') final String id,
     @Default('') final String statement,
     @Default('') final String answer,
-    @Default('') final String explaination,
+    @Default('') final String explanation,
   }) = _Pearl;
 
   factory Pearl.fromJson(json) => _$PearlFromJson(json);
-  // factory Pearl.pearl(String id) => pearlsManager.pearl(id);
 }
 
 @freezed
@@ -99,14 +81,4 @@ class Pearls with _$Pearls {
 
   factory Pearls.fromJson(json) => _$PearlsFromJson(json);
   int get length => pearlsCache.length;
-}
-
-@freezed
-class PearlsEvent with _$PearlsEvent {
-  const factory PearlsEvent.add(Pearl pearl) = _PearlsEventAdd;
-  const factory PearlsEvent.remove(String id) = _PearlsEventRemove;
-  const factory PearlsEvent.removeAll() = _PearlsEventRemoveAll;
-  const factory PearlsEvent.loading() = _PearlsEventLoading;
-  const factory PearlsEvent.importFromFile() = _PearlsEventImport;
-  const factory PearlsEvent.exportToFile() = _PearlsEventExport;
 }

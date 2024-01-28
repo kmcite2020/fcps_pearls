@@ -1,9 +1,10 @@
+import 'package:fcps_pearls/features/home_page.dart';
 import 'package:fcps_pearls/main.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'pearls/pages/pearls.dart';
 import 'settings/settings.dart';
 
-class App extends UI {
+class App extends StatelessWidget {
   const App({super.key});
 
   @override
@@ -35,57 +36,7 @@ class App extends UI {
         appBarStyle: FlexAppBarStyle.primary,
       ),
       themeMode: themeModeRM(),
-      home: PearlsPage(),
+      home: HomePage(),
     );
   }
-}
-
-class MyDrawer extends UI {
-  const MyDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: NavigationDrawer(
-        onDestinationSelected: _setIndex,
-        selectedIndex: _indexRM.state,
-        children: [
-          'FCPS Pearls'.text(scale: 3).pad().pad(),
-          SizedBox(height: 8),
-          NavigationDrawerDestination(
-            icon: const Icon(Icons.diamond_outlined),
-            label: 'Pearls - List'.text(),
-          ),
-          SizedBox(height: 8),
-          NavigationDrawerDestination(
-            icon: const Icon(Icons.diamond),
-            label: 'Pearls - Study Mode'.text(),
-          ),
-          SizedBox(height: 8),
-          NavigationDrawerDestination(
-            icon: const Icon(Icons.settings),
-            label: 'Settings'.text(),
-          ),
-          SizedBox(height: 8),
-          Divider(),
-          SizedBox(height: 8),
-          NavigationDrawerDestination(
-            icon: const Icon(Icons.assessment),
-            label: 'Add Pearl Page'.text(),
-          ),
-          SizedBox(height: 8),
-          NavigationDrawerDestination(
-            icon: const Icon(Icons.edit_document),
-            label: 'Edit Pearls'.text(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-final _indexRM = RM.inject(() => 0);
-void _setIndex(int i) {
-  _indexRM.state = i;
-  navigator.back();
 }

@@ -1,6 +1,6 @@
-import '../main.dart';
+import '../../../main.dart';
 
-class AddPearlPage extends UI {
+class AddPearlPage extends StatelessWidget {
   static final pearlRM = RM.inject(Pearl.new);
   static Pearl get pearl => pearlRM.state;
   static void setPearl(Pearl _) => pearlRM.state = _;
@@ -39,8 +39,8 @@ class AddPearlPage extends UI {
             decoration: InputDecoration(
               labelText: 'Explaination',
             ),
-            onChanged: (explaination) {
-              setPearl(pearl.copyWith(explaination: explaination));
+            onChanged: (explanation) {
+              setPearl(pearl.copyWith(explanation: explanation));
             },
             maxLines: 6,
             minLines: 2,

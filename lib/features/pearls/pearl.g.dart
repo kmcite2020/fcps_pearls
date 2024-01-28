@@ -10,7 +10,7 @@ _$PearlImpl _$$PearlImplFromJson(Map<String, dynamic> json) => _$PearlImpl(
       id: json['id'] as String? ?? '',
       statement: json['statement'] as String? ?? '',
       answer: json['answer'] as String? ?? '',
-      explaination: json['explaination'] as String? ?? '',
+      explanation: json['explanation'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$PearlImplToJson(_$PearlImpl instance) =>
@@ -18,7 +18,7 @@ Map<String, dynamic> _$$PearlImplToJson(_$PearlImpl instance) =>
       'id': instance.id,
       'statement': instance.statement,
       'answer': instance.answer,
-      'explaination': instance.explaination,
+      'explanation': instance.explanation,
     };
 
 _$PearlsImpl _$$PearlsImplFromJson(Map<String, dynamic> json) => _$PearlsImpl(

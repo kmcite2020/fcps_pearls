@@ -1,7 +1,7 @@
 import '../../../main.dart';
 import 'pearl_details.dart';
 
-class EditPearlsPage extends UI {
+class EditPearlsPage extends StatelessWidget {
   const EditPearlsPage();
   @override
   Widget build(BuildContext context) {

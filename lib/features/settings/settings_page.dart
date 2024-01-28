@@ -5,7 +5,7 @@ import 'package:fcps_pearls/main.dart';
 
 import 'settings.dart';
 
-class SettingsPage extends UI {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override

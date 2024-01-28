@@ -1,11 +1,11 @@
-import 'package:fcps_pearls/features/add_content_page.dart';
+import 'package:fcps_pearls/features/pearls/pages/add_content_page.dart';
 import 'package:fcps_pearls/features/pearls/pages/study_pearls.dart';
 import 'package:fcps_pearls/features/settings/settings_page.dart';
 import 'package:fcps_pearls/main.dart';
 
 import 'pearl_details.dart';
 
-class PearlsPage extends UI {
+class PearlsPage extends StatelessWidget {
   const PearlsPage({super.key});
 
   @override
@@ -22,7 +22,7 @@ class PearlsPage extends UI {
           ),
           IconButton(
             onPressed: () {
-              navigator.to(StudyPearlsPage());
+              navigator.to(StudyModePage());
             },
             icon: Icon(Icons.stadium_sharp),
           ),

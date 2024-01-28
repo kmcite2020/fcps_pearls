@@ -382,6 +382,8 @@ mixin _$PearlsEvent {
     required TResult Function(String id) remove,
     required TResult Function() removeAll,
     required TResult Function() loading,
+    required TResult Function() importFromFile,
+    required TResult Function() exportToFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -390,6 +392,8 @@ mixin _$PearlsEvent {
     TResult? Function(String id)? remove,
     TResult? Function()? removeAll,
     TResult? Function()? loading,
+    TResult? Function()? importFromFile,
+    TResult? Function()? exportToFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -398,6 +402,8 @@ mixin _$PearlsEvent {
     TResult Function(String id)? remove,
     TResult Function()? removeAll,
     TResult Function()? loading,
+    TResult Function()? importFromFile,
+    TResult Function()? exportToFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -407,6 +413,8 @@ mixin _$PearlsEvent {
     required TResult Function(_PearlsEventRemove value) remove,
     required TResult Function(_PearlsEventRemoveAll value) removeAll,
     required TResult Function(_PearlsEventLoading value) loading,
+    required TResult Function(_PearlsEventImport value) importFromFile,
+    required TResult Function(_PearlsEventExport value) exportToFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -415,6 +423,8 @@ mixin _$PearlsEvent {
     TResult? Function(_PearlsEventRemove value)? remove,
     TResult? Function(_PearlsEventRemoveAll value)? removeAll,
     TResult? Function(_PearlsEventLoading value)? loading,
+    TResult? Function(_PearlsEventImport value)? importFromFile,
+    TResult? Function(_PearlsEventExport value)? exportToFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -423,6 +433,8 @@ mixin _$PearlsEvent {
     TResult Function(_PearlsEventRemove value)? remove,
     TResult Function(_PearlsEventRemoveAll value)? removeAll,
     TResult Function(_PearlsEventLoading value)? loading,
+    TResult Function(_PearlsEventImport value)? importFromFile,
+    TResult Function(_PearlsEventExport value)? exportToFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -525,6 +537,8 @@ class _$PearlsEventAddImpl implements _PearlsEventAdd {
     required TResult Function(String id) remove,
     required TResult Function() removeAll,
     required TResult Function() loading,
+    required TResult Function() importFromFile,
+    required TResult Function() exportToFile,
   }) {
     return add(pearl);
   }
@@ -536,6 +550,8 @@ class _$PearlsEventAddImpl implements _PearlsEventAdd {
     TResult? Function(String id)? remove,
     TResult? Function()? removeAll,
     TResult? Function()? loading,
+    TResult? Function()? importFromFile,
+    TResult? Function()? exportToFile,
   }) {
     return add?.call(pearl);
   }
@@ -547,6 +563,8 @@ class _$PearlsEventAddImpl implements _PearlsEventAdd {
     TResult Function(String id)? remove,
     TResult Function()? removeAll,
     TResult Function()? loading,
+    TResult Function()? importFromFile,
+    TResult Function()? exportToFile,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -562,6 +580,8 @@ class _$PearlsEventAddImpl implements _PearlsEventAdd {
     required TResult Function(_PearlsEventRemove value) remove,
     required TResult Function(_PearlsEventRemoveAll value) removeAll,
     required TResult Function(_PearlsEventLoading value) loading,
+    required TResult Function(_PearlsEventImport value) importFromFile,
+    required TResult Function(_PearlsEventExport value) exportToFile,
   }) {
     return add(this);
   }
@@ -573,6 +593,8 @@ class _$PearlsEventAddImpl implements _PearlsEventAdd {
     TResult? Function(_PearlsEventRemove value)? remove,
     TResult? Function(_PearlsEventRemoveAll value)? removeAll,
     TResult? Function(_PearlsEventLoading value)? loading,
+    TResult? Function(_PearlsEventImport value)? importFromFile,
+    TResult? Function(_PearlsEventExport value)? exportToFile,
   }) {
     return add?.call(this);
   }
@@ -584,6 +606,8 @@ class _$PearlsEventAddImpl implements _PearlsEventAdd {
     TResult Function(_PearlsEventRemove value)? remove,
     TResult Function(_PearlsEventRemoveAll value)? removeAll,
     TResult Function(_PearlsEventLoading value)? loading,
+    TResult Function(_PearlsEventImport value)? importFromFile,
+    TResult Function(_PearlsEventExport value)? exportToFile,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -671,6 +695,8 @@ class _$PearlsEventRemoveImpl implements _PearlsEventRemove {
     required TResult Function(String id) remove,
     required TResult Function() removeAll,
     required TResult Function() loading,
+    required TResult Function() importFromFile,
+    required TResult Function() exportToFile,
   }) {
     return remove(id);
   }
@@ -682,6 +708,8 @@ class _$PearlsEventRemoveImpl implements _PearlsEventRemove {
     TResult? Function(String id)? remove,
     TResult? Function()? removeAll,
     TResult? Function()? loading,
+    TResult? Function()? importFromFile,
+    TResult? Function()? exportToFile,
   }) {
     return remove?.call(id);
   }
@@ -693,6 +721,8 @@ class _$PearlsEventRemoveImpl implements _PearlsEventRemove {
     TResult Function(String id)? remove,
     TResult Function()? removeAll,
     TResult Function()? loading,
+    TResult Function()? importFromFile,
+    TResult Function()? exportToFile,
     required TResult orElse(),
   }) {
     if (remove != null) {
@@ -708,6 +738,8 @@ class _$PearlsEventRemoveImpl implements _PearlsEventRemove {
     required TResult Function(_PearlsEventRemove value) remove,
     required TResult Function(_PearlsEventRemoveAll value) removeAll,
     required TResult Function(_PearlsEventLoading value) loading,
+    required TResult Function(_PearlsEventImport value) importFromFile,
+    required TResult Function(_PearlsEventExport value) exportToFile,
   }) {
     return remove(this);
   }
@@ -719,6 +751,8 @@ class _$PearlsEventRemoveImpl implements _PearlsEventRemove {
     TResult? Function(_PearlsEventRemove value)? remove,
     TResult? Function(_PearlsEventRemoveAll value)? removeAll,
     TResult? Function(_PearlsEventLoading value)? loading,
+    TResult? Function(_PearlsEventImport value)? importFromFile,
+    TResult? Function(_PearlsEventExport value)? exportToFile,
   }) {
     return remove?.call(this);
   }
@@ -730,6 +764,8 @@ class _$PearlsEventRemoveImpl implements _PearlsEventRemove {
     TResult Function(_PearlsEventRemove value)? remove,
     TResult Function(_PearlsEventRemoveAll value)? removeAll,
     TResult Function(_PearlsEventLoading value)? loading,
+    TResult Function(_PearlsEventImport value)? importFromFile,
+    TResult Function(_PearlsEventExport value)? exportToFile,
     required TResult orElse(),
   }) {
     if (remove != null) {
@@ -791,6 +827,8 @@ class _$PearlsEventRemoveAllImpl implements _PearlsEventRemoveAll {
     required TResult Function(String id) remove,
     required TResult Function() removeAll,
     required TResult Function() loading,
+    required TResult Function() importFromFile,
+    required TResult Function() exportToFile,
   }) {
     return removeAll();
   }
@@ -802,6 +840,8 @@ class _$PearlsEventRemoveAllImpl implements _PearlsEventRemoveAll {
     TResult? Function(String id)? remove,
     TResult? Function()? removeAll,
     TResult? Function()? loading,
+    TResult? Function()? importFromFile,
+    TResult? Function()? exportToFile,
   }) {
     return removeAll?.call();
   }
@@ -813,6 +853,8 @@ class _$PearlsEventRemoveAllImpl implements _PearlsEventRemoveAll {
     TResult Function(String id)? remove,
     TResult Function()? removeAll,
     TResult Function()? loading,
+    TResult Function()? importFromFile,
+    TResult Function()? exportToFile,
     required TResult orElse(),
   }) {
     if (removeAll != null) {
@@ -828,6 +870,8 @@ class _$PearlsEventRemoveAllImpl implements _PearlsEventRemoveAll {
     required TResult Function(_PearlsEventRemove value) remove,
     required TResult Function(_PearlsEventRemoveAll value) removeAll,
     required TResult Function(_PearlsEventLoading value) loading,
+    required TResult Function(_PearlsEventImport value) importFromFile,
+    required TResult Function(_PearlsEventExport value) exportToFile,
   }) {
     return removeAll(this);
   }
@@ -839,6 +883,8 @@ class _$PearlsEventRemoveAllImpl implements _PearlsEventRemoveAll {
     TResult? Function(_PearlsEventRemove value)? remove,
     TResult? Function(_PearlsEventRemoveAll value)? removeAll,
     TResult? Function(_PearlsEventLoading value)? loading,
+    TResult? Function(_PearlsEventImport value)? importFromFile,
+    TResult? Function(_PearlsEventExport value)? exportToFile,
   }) {
     return removeAll?.call(this);
   }
@@ -850,6 +896,8 @@ class _$PearlsEventRemoveAllImpl implements _PearlsEventRemoveAll {
     TResult Function(_PearlsEventRemove value)? remove,
     TResult Function(_PearlsEventRemoveAll value)? removeAll,
     TResult Function(_PearlsEventLoading value)? loading,
+    TResult Function(_PearlsEventImport value)? importFromFile,
+    TResult Function(_PearlsEventExport value)? exportToFile,
     required TResult orElse(),
   }) {
     if (removeAll != null) {
@@ -905,6 +953,8 @@ class _$PearlsEventLoadingImpl implements _PearlsEventLoading {
     required TResult Function(String id) remove,
     required TResult Function() removeAll,
     required TResult Function() loading,
+    required TResult Function() importFromFile,
+    required TResult Function() exportToFile,
   }) {
     return loading();
   }
@@ -916,6 +966,8 @@ class _$PearlsEventLoadingImpl implements _PearlsEventLoading {
     TResult? Function(String id)? remove,
     TResult? Function()? removeAll,
     TResult? Function()? loading,
+    TResult? Function()? importFromFile,
+    TResult? Function()? exportToFile,
   }) {
     return loading?.call();
   }
@@ -927,6 +979,8 @@ class _$PearlsEventLoadingImpl implements _PearlsEventLoading {
     TResult Function(String id)? remove,
     TResult Function()? removeAll,
     TResult Function()? loading,
+    TResult Function()? importFromFile,
+    TResult Function()? exportToFile,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -942,6 +996,8 @@ class _$PearlsEventLoadingImpl implements _PearlsEventLoading {
     required TResult Function(_PearlsEventRemove value) remove,
     required TResult Function(_PearlsEventRemoveAll value) removeAll,
     required TResult Function(_PearlsEventLoading value) loading,
+    required TResult Function(_PearlsEventImport value) importFromFile,
+    required TResult Function(_PearlsEventExport value) exportToFile,
   }) {
     return loading(this);
   }
@@ -953,6 +1009,8 @@ class _$PearlsEventLoadingImpl implements _PearlsEventLoading {
     TResult? Function(_PearlsEventRemove value)? remove,
     TResult? Function(_PearlsEventRemoveAll value)? removeAll,
     TResult? Function(_PearlsEventLoading value)? loading,
+    TResult? Function(_PearlsEventImport value)? importFromFile,
+    TResult? Function(_PearlsEventExport value)? exportToFile,
   }) {
     return loading?.call(this);
   }
@@ -964,6 +1022,8 @@ class _$PearlsEventLoadingImpl implements _PearlsEventLoading {
     TResult Function(_PearlsEventRemove value)? remove,
     TResult Function(_PearlsEventRemoveAll value)? removeAll,
     TResult Function(_PearlsEventLoading value)? loading,
+    TResult Function(_PearlsEventImport value)? importFromFile,
+    TResult Function(_PearlsEventExport value)? exportToFile,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -975,4 +1035,256 @@ class _$PearlsEventLoadingImpl implements _PearlsEventLoading {
 
 abstract class _PearlsEventLoading implements PearlsEvent {
   const factory _PearlsEventLoading() = _$PearlsEventLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$PearlsEventImportImplCopyWith<$Res> {
+  factory _$$PearlsEventImportImplCopyWith(_$PearlsEventImportImpl value,
+          $Res Function(_$PearlsEventImportImpl) then) =
+      __$$PearlsEventImportImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PearlsEventImportImplCopyWithImpl<$Res>
+    extends _$PearlsEventCopyWithImpl<$Res, _$PearlsEventImportImpl>
+    implements _$$PearlsEventImportImplCopyWith<$Res> {
+  __$$PearlsEventImportImplCopyWithImpl(_$PearlsEventImportImpl _value,
+      $Res Function(_$PearlsEventImportImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$PearlsEventImportImpl implements _PearlsEventImport {
+  const _$PearlsEventImportImpl();
+
+  @override
+  String toString() {
+    return 'PearlsEvent.importFromFile()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$PearlsEventImportImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Pearl pearl) add,
+    required TResult Function(String id) remove,
+    required TResult Function() removeAll,
+    required TResult Function() loading,
+    required TResult Function() importFromFile,
+    required TResult Function() exportToFile,
+  }) {
+    return importFromFile();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Pearl pearl)? add,
+    TResult? Function(String id)? remove,
+    TResult? Function()? removeAll,
+    TResult? Function()? loading,
+    TResult? Function()? importFromFile,
+    TResult? Function()? exportToFile,
+  }) {
+    return importFromFile?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Pearl pearl)? add,
+    TResult Function(String id)? remove,
+    TResult Function()? removeAll,
+    TResult Function()? loading,
+    TResult Function()? importFromFile,
+    TResult Function()? exportToFile,
+    required TResult orElse(),
+  }) {
+    if (importFromFile != null) {
+      return importFromFile();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PearlsEventAdd value) add,
+    required TResult Function(_PearlsEventRemove value) remove,
+    required TResult Function(_PearlsEventRemoveAll value) removeAll,
+    required TResult Function(_PearlsEventLoading value) loading,
+    required TResult Function(_PearlsEventImport value) importFromFile,
+    required TResult Function(_PearlsEventExport value) exportToFile,
+  }) {
+    return importFromFile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PearlsEventAdd value)? add,
+    TResult? Function(_PearlsEventRemove value)? remove,
+    TResult? Function(_PearlsEventRemoveAll value)? removeAll,
+    TResult? Function(_PearlsEventLoading value)? loading,
+    TResult? Function(_PearlsEventImport value)? importFromFile,
+    TResult? Function(_PearlsEventExport value)? exportToFile,
+  }) {
+    return importFromFile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PearlsEventAdd value)? add,
+    TResult Function(_PearlsEventRemove value)? remove,
+    TResult Function(_PearlsEventRemoveAll value)? removeAll,
+    TResult Function(_PearlsEventLoading value)? loading,
+    TResult Function(_PearlsEventImport value)? importFromFile,
+    TResult Function(_PearlsEventExport value)? exportToFile,
+    required TResult orElse(),
+  }) {
+    if (importFromFile != null) {
+      return importFromFile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PearlsEventImport implements PearlsEvent {
+  const factory _PearlsEventImport() = _$PearlsEventImportImpl;
+}
+
+/// @nodoc
+abstract class _$$PearlsEventExportImplCopyWith<$Res> {
+  factory _$$PearlsEventExportImplCopyWith(_$PearlsEventExportImpl value,
+          $Res Function(_$PearlsEventExportImpl) then) =
+      __$$PearlsEventExportImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PearlsEventExportImplCopyWithImpl<$Res>
+    extends _$PearlsEventCopyWithImpl<$Res, _$PearlsEventExportImpl>
+    implements _$$PearlsEventExportImplCopyWith<$Res> {
+  __$$PearlsEventExportImplCopyWithImpl(_$PearlsEventExportImpl _value,
+      $Res Function(_$PearlsEventExportImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$PearlsEventExportImpl implements _PearlsEventExport {
+  const _$PearlsEventExportImpl();
+
+  @override
+  String toString() {
+    return 'PearlsEvent.exportToFile()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$PearlsEventExportImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Pearl pearl) add,
+    required TResult Function(String id) remove,
+    required TResult Function() removeAll,
+    required TResult Function() loading,
+    required TResult Function() importFromFile,
+    required TResult Function() exportToFile,
+  }) {
+    return exportToFile();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Pearl pearl)? add,
+    TResult? Function(String id)? remove,
+    TResult? Function()? removeAll,
+    TResult? Function()? loading,
+    TResult? Function()? importFromFile,
+    TResult? Function()? exportToFile,
+  }) {
+    return exportToFile?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Pearl pearl)? add,
+    TResult Function(String id)? remove,
+    TResult Function()? removeAll,
+    TResult Function()? loading,
+    TResult Function()? importFromFile,
+    TResult Function()? exportToFile,
+    required TResult orElse(),
+  }) {
+    if (exportToFile != null) {
+      return exportToFile();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PearlsEventAdd value) add,
+    required TResult Function(_PearlsEventRemove value) remove,
+    required TResult Function(_PearlsEventRemoveAll value) removeAll,
+    required TResult Function(_PearlsEventLoading value) loading,
+    required TResult Function(_PearlsEventImport value) importFromFile,
+    required TResult Function(_PearlsEventExport value) exportToFile,
+  }) {
+    return exportToFile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PearlsEventAdd value)? add,
+    TResult? Function(_PearlsEventRemove value)? remove,
+    TResult? Function(_PearlsEventRemoveAll value)? removeAll,
+    TResult? Function(_PearlsEventLoading value)? loading,
+    TResult? Function(_PearlsEventImport value)? importFromFile,
+    TResult? Function(_PearlsEventExport value)? exportToFile,
+  }) {
+    return exportToFile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PearlsEventAdd value)? add,
+    TResult Function(_PearlsEventRemove value)? remove,
+    TResult Function(_PearlsEventRemoveAll value)? removeAll,
+    TResult Function(_PearlsEventLoading value)? loading,
+    TResult Function(_PearlsEventImport value)? importFromFile,
+    TResult Function(_PearlsEventExport value)? exportToFile,
+    required TResult orElse(),
+  }) {
+    if (exportToFile != null) {
+      return exportToFile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PearlsEventExport implements PearlsEvent {
+  const factory _PearlsEventExport() = _$PearlsEventExportImpl;
 }

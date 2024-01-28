@@ -10,7 +10,6 @@ class AddPearlPage extends UI {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
       appBar: AppBar(
         title: 'Pearl'.text(),
       ),
@@ -48,12 +47,12 @@ class AddPearlPage extends UI {
           ).pad(),
           ElevatedButton(
             onPressed: () {
-              // pearlsManager.addPearl(pearl);
+              pearlsRM.addPearl(pearl.copyWith(id: randomID));
               setPearl(Pearl());
             },
             child: 'Save Pearl'.text(),
           ).pad(),
-          pearl.text().pad()
+          pearl.text().pad(),
         ],
       ),
     );

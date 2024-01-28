@@ -1,87 +1,79 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:async';
+import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:fcps_pearls/main.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'pearl.freezed.dart';
 part 'pearl.g.dart';
 
-class PearlsBloc extends HydratedBloc<PearlsEvent, Pearls> {
-  final BuildContext context;
-  PearlsBloc(
-    this.context,
-  ) : super(Pearls()) {
-    on<_PearlsEventAdd>(_pearlEventAdd);
-    on<_PearlsEventRemove>(_pearlEventRemove);
-    on<_PearlsEventRemoveAll>(_pearlEventRemoveAll);
-    on<_PearlsEventLoading>(_pearlEventLoading);
-  }
+final pearlsRM = PearlsRM();
 
-  @override
-  Pearls? fromJson(Map<String, dynamic> json) => Pearls.fromJson(json);
-
-  @override
-  Map<String, dynamic>? toJson(Pearls state) => state.toJson();
-
-  FutureOr<void> _pearlEventAdd(
-    _PearlsEventAdd event,
-    Emitter<Pearls> emit,
-  ) {
-    emit(
-      Pearls(loading: true),
-    );
-    emit(
-      state.copyWith(
-        pearlsCache: Map.of(state.pearlsCache)..[event.pearl.id] = event.pearl,
+class PearlsRM {
+  final pearlsRM = RM.inject(
+    () => Pearls(),
+    persist: () => PersistState(
+      key: 'pearls',
+      toJson: (s) => jsonEncode(
+        s.toJson(),
       ),
-    );
-    emit(
-      Pearls(loading: false),
-    );
-  }
-
-  FutureOr<void> _pearlEventRemove(
-    _PearlsEventRemove event,
-    Emitter<Pearls> emit,
-  ) {
-    emit(
-      Pearls(loading: true),
-    );
-    emit(
-      state.copyWith(
-        pearlsCache: Map.of(state.pearlsCache)..remove(event.id),
+      fromJson: (json) => Pearls.fromJson(
+        jsonDecode(json),
       ),
-    );
-    emit(
-      Pearls(loading: false),
-    );
+    ),
+  );
+  Pearls call([Pearls? _pearls]) {
+    if (_pearls != null) pearls = _pearls;
+    return pearls;
   }
 
-  FutureOr<void> _pearlEventRemoveAll(
-    _PearlsEventRemoveAll event,
-    Emitter<Pearls> emit,
-  ) {
-    emit(
-      Pearls(loading: true),
-    );
-    emit(
-      state.copyWith(
-        pearlsCache: {},
-      ),
-    );
-    emit(
-      Pearls(loading: false),
-    );
+  Pearls get pearls => pearlsRM.state;
+  set pearls(Pearls _pearls) => pearlsRM.state = _pearls;
+
+  List<Pearl> get listOfPearls => pearls.pearlsCache.values.toList();
+  Map<String, Pearl> get mapOfPearls => pearls.pearlsCache;
+
+  void addPearl(Pearl pearl) {
+    loading();
+    call(pearls.copyWith(pearlsCache: Map.of(mapOfPearls)..[pearl.id] = pearl));
+    success();
+    // exportToFile();
   }
 
-  FutureOr<void> _pearlEventLoading(
-    _PearlsEventLoading event,
-    Emitter<Pearls> emit,
-  ) {
-    emit(state.copyWith(loading: true));
+  void removePearl(Pearl pearl) {
+    call(pearls.copyWith(pearlsCache: Map.of(mapOfPearls)..remove(pearl.id)));
   }
+
+  void removeAllPearls() {
+    call(pearls.copyWith(pearlsCache: {}));
+  }
+
+  void loading() {
+    call(pearls.copyWith(loading: true));
+  }
+
+  void success() {
+    call(pearls.copyWith(loading: false));
+  }
+
+  // void exportToFile() async {
+  //   loading();
+  //   final json = call().toJson();
+  //   final str = jsonEncode(json);
+  //   final string = File('path');
+  //   await Future.delayed(20.milliseconds);
+  //   success();
+  //   string.writeAsStringSync(str);
+  // }
+
+  // Pearls importFromFile() {
+  //   loading();
+  //   final string = File('path');
+  //   final json = jsonDecode(string.readAsStringSync());
+  //   final pearls = Pearls.fromJson(json);
+  //   print(pearls);
+  //   success();
+  //   return pearls;
+  // }
 }
 
 @freezed
@@ -115,4 +107,6 @@ class PearlsEvent with _$PearlsEvent {
   const factory PearlsEvent.remove(String id) = _PearlsEventRemove;
   const factory PearlsEvent.removeAll() = _PearlsEventRemoveAll;
   const factory PearlsEvent.loading() = _PearlsEventLoading;
+  const factory PearlsEvent.importFromFile() = _PearlsEventImport;
+  const factory PearlsEvent.exportToFile() = _PearlsEventExport;
 }

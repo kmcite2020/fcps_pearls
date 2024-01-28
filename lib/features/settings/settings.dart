@@ -1,15 +1,14 @@
 import 'dart:convert';
 
 import 'package:fcps_pearls/main.dart';
-import 'package:flutter/material.dart';
+import 'package:fcps_pearls/manager.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
 
 part 'settings.freezed.dart';
 part 'settings.g.dart';
 
 @freezed
-class Settings with _$Settings implements Model<Settings> {
+class Settings with _$Settings {
   const factory Settings({
     @Default(ThemeMode.system) final ThemeMode themeMode,
     @Default(8) final double borderRadius,
@@ -23,7 +22,7 @@ class Settings with _$Settings implements Model<Settings> {
       _$SettingsFromJson(json);
 
   const Settings._();
-  @override
+
   Settings call([Settings? _settings]) =>
       _settings != null ? settings = _settings : settings;
 }
@@ -48,7 +47,6 @@ final settingsRM = RM.inject(
 );
 Settings get settings => settingsRM.state;
 set settings(Settings _) => settingsRM.state = _;
-ThemeMode get themeMode => settings.themeMode;
-MaterialColor get materialColor => settings.materialColor;
-set themeMode(_) => settings(settings.copyWith(themeMode: _));
-set materialColor(_) => settings(settings.copyWith(materialColor: _));
+
+final themeModeRM = ThemeMode.system.obs;
+final materialColorRM = Colors.amber.obs;

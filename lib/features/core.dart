@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 import 'settings/settings.dart';
@@ -43,7 +43,7 @@ class HiveStorage implements IPersistStore {
   @override
   Future<void> init() async {
     await Hive.initFlutter();
-    box = await Hive.openBox('pearls');
+    box = await Hive.openBox('fcps_pearls');
   }
 
   @override

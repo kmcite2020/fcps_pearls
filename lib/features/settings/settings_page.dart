@@ -1,63 +1,78 @@
 import 'dart:io';
 
 import 'package:colornames/colornames.dart';
-import 'package:flutter/material.dart';
-import 'package:states_rebuilder/scr/state_management/rm.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:fcps_pearls/main.dart';
 
-import '../core.dart';
 import 'settings.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends UI {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        const SliverAppBar(
-          title: Text('Settings'),
-        ),
-        SliverList.list(
-          children: [
-            DropdownButtonFormField(
-              value: themeMode,
-              items: ThemeMode.values
-                  .map(
-                    (eachThemeMode) => DropdownMenuItem(
-                      value: eachThemeMode,
-                      child: eachThemeMode.name.toUpperCase().text(),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (_) => themeMode = _,
-            ).pad(),
-            DropdownButtonFormField(
-              value: materialColor,
-              items: Colors.primaries.map(
-                (eachMaterialColor) {
-                  return DropdownMenuItem(
-                    value: eachMaterialColor,
-                    child: eachMaterialColor.colorName.toUpperCase().text(),
-                  );
-                },
-              ).toList(),
-              onChanged: (_) => materialColor = _,
-            ).pad(),
-            ElevatedButton(
-              onPressed: () async {
-                pearlsToJsonExporter.exportToJson();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Settings'),
+      ),
+      body: ListView(
+        children: [
+          DropdownButtonFormField(
+            value: themeModeRM(),
+            items: ThemeMode.values
+                .map(
+                  (eachThemeMode) => DropdownMenuItem(
+                    value: eachThemeMode,
+                    child: eachThemeMode.name.toUpperCase().text(),
+                  ),
+                )
+                .toList(),
+            onChanged: themeModeRM.call,
+          ).pad(),
+          DropdownButtonFormField(
+            value: materialColorRM(),
+            items: Colors.primaries.map(
+              (eachMaterialColor) {
+                return DropdownMenuItem(
+                  value: eachMaterialColor,
+                  child: eachMaterialColor.colorName.toUpperCase().text(),
+                );
               },
-              child: 'Export ToJson'.text(),
-            ).pad(),
-            pearlsToJsonExporter.backupRM.state.text().pad(),
-            ElevatedButton(
-              onPressed: () => pearlsToJsonExporter.importFromJson(),
-              child: 'Import FromJson'.text(),
-            ).pad(),
-          ],
-        ),
-      ],
+            ).toList(),
+            onChanged: materialColorRM.call,
+          ).pad(),
+          // ElevatedButton(
+          //   onPressed: () async {
+          //     pearlsToJsonExporter.exportToJson();
+          //   },
+          //   child: 'Export ToJson'.text(),
+          // ).pad(),
+          // pearlsToJsonExporter.backupRM.state.text().pad(),
+
+          pearlsRM().loading
+              ? CircularProgressIndicator().pad()
+              : pearlsRM().length.text().pad(),
+
+          // ElevatedButton(
+          //   onPressed: () {
+          //     pearlsRM.importFromFile();
+          //     backupRM.add(BackupEvent.importFromFile('file'));
+          //   },
+          //   child: 'Import FromJson'.text(),
+          // ).pad(),
+          ElevatedButton(
+            onPressed: pearlsRM().loading
+                ? null
+                : () {
+                    // pearlsRM.exportToFile();
+                  },
+            child: 'Export ToJson'.text(),
+          ).pad(),
+          // ElevatedButton(
+          //   onPressed: () => pearlsToJsonExporter.importFromJson(),
+          //   child: 'Import FromJson'.text(),
+          // ).pad(),
+        ],
+      ),
     );
   }
 }

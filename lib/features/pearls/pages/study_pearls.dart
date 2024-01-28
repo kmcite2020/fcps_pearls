@@ -9,7 +9,7 @@ class StudyPearlsPage extends StatefulWidget {
 
 class _StudyPearlsPageState extends State<StudyPearlsPage>
     with SingleTickerProviderStateMixin {
-  late final PageController _tabController = PageController();
+  // late final PageController _tabController = PageController();
   // TabController(
   //     length: context.watch<PearlsBloc>().state.length, vsync: this);
 

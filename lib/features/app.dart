@@ -1,29 +1,20 @@
 import 'package:fcps_pearls/main.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-import 'package:signals/signals_flutter.dart';
-import 'add_content_page.dart';
-import 'core.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
-import 'pearls/pages/edit_pearls.dart';
 import 'pearls/pages/pearls.dart';
-import 'pearls/pages/study_pearls.dart';
 import 'settings/settings.dart';
-import 'settings/settings_page.dart';
 
 class App extends UI {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final _index = _indexRM.watch(context);
     return MaterialApp(
       navigatorKey: RM.navigate.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: FlexThemeData.light(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: materialColor,
+          primarySwatch: materialColorRM(),
         ),
         subThemesData: FlexSubThemesData(
           defaultRadius: settings.borderRadius,
@@ -33,7 +24,7 @@ class App extends UI {
       ),
       darkTheme: FlexThemeData.dark(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: materialColor,
+          primarySwatch: materialColorRM(),
           brightness: Brightness.dark,
         ),
         subThemesData: FlexSubThemesData(
@@ -43,34 +34,21 @@ class App extends UI {
         darkIsTrueBlack: true,
         appBarStyle: FlexAppBarStyle.primary,
       ),
-      themeMode: themeMode,
-      home: Scaffold(
-        drawer: const MyDrawer(),
-        body: IndexedStack(
-          index: _index,
-          children: const [
-            PearlsPage(),
-            StudyPearlsPage(),
-            SettingsPage(),
-            AddPearlPage(),
-            EditPearlsPage(),
-          ],
-        ),
-      ),
+      themeMode: themeModeRM(),
+      home: PearlsPage(),
     );
   }
 }
 
-class MyDrawer extends ReactiveStatelessWidget {
+class MyDrawer extends UI {
   const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final _index = _indexRM.watch(context);
     return Drawer(
       child: NavigationDrawer(
         onDestinationSelected: _setIndex,
-        selectedIndex: _index,
+        selectedIndex: _indexRM.state,
         children: [
           'FCPS Pearls'.text(scale: 3).pad().pad(),
           SizedBox(height: 8),
@@ -106,8 +84,8 @@ class MyDrawer extends ReactiveStatelessWidget {
   }
 }
 
-final _indexRM = signal(0);
+final _indexRM = RM.inject(() => 0);
 void _setIndex(int i) {
-  _indexRM.set(i);
+  _indexRM.state = i;
   navigator.back();
 }

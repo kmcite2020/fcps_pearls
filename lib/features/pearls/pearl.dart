@@ -1,7 +1,6 @@
-import 'dart:convert';
+import 'package:fcps_pearls/features/pearls/repository.dart';
 
-import 'package:fcps_pearls/main.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../main.dart';
 
 part 'pearl.freezed.dart';
 part 'pearl.g.dart';
@@ -9,53 +8,44 @@ part 'pearl.g.dart';
 final pearlsRM = PearlsRM();
 
 class PearlsRM {
-  final pearlsRM = RM.inject(
-    () => Pearls(),
+  final pearlsRM = RM.injectFuture<List<Pearl>>(
+    () => pearlsRepository.getPearls(),
+    initialState: <Pearl>[],
+    autoDisposeWhenNotUsed: false,
     persist: () => PersistState(
       key: 'pearls',
-      toJson: (s) => jsonEncode(
-        s.toJson(),
-      ),
-      fromJson: (json) => Pearls.fromJson(
-        jsonDecode(json),
-      ),
+      toJson: Pearl.toListJson,
+      fromJson: Pearl.fromListJson,
     ),
   );
-  Pearls call([Pearls? _pearls]) {
-    if (_pearls != null) pearls = _pearls;
-    return pearls;
+
+  bool get loading => pearlsRM.isWaiting;
+  List<Pearl> call() => pearlsRM.state;
+  Future<List<Pearl>> getPearlsAsync() {
+    pearlsRM.stateAsync = pearlsRepository.getPearls();
+    return pearlsRM.stateAsync;
   }
 
-  Pearls get pearls => pearlsRM.state;
-  set pearls(Pearls _pearls) => pearlsRM.state = _pearls;
-
-  List<Pearl> get listOfPearls => pearls.pearlsCache.values.toList();
-  Map<String, Pearl> get mapOfPearls => pearls.pearlsCache;
-
-  void addPearl(Pearl pearl) {
-    loading();
-    call(pearls.copyWith(pearlsCache: Map.of(mapOfPearls)..[pearl.id] = pearl));
-    success();
-  }
-
-  void removePearl(Pearl pearl) {
-    loading();
-    call(pearls.copyWith(pearlsCache: Map.of(mapOfPearls)..remove(pearl.id)));
-    success();
-  }
-
-  void removeAllPearls() {
-    loading();
-    call(pearls.copyWith(pearlsCache: {}));
-    success();
-  }
-
-  void loading() {
-    call(pearls.copyWith(loading: true));
-  }
-
-  void success() {
-    call(pearls.copyWith(loading: false));
+  Pearl getPearl(String id) => this().firstWhere((element) => element.id == id);
+  Future<void> createPearl(Pearl pearl) async => await pearlsRM.setState(
+        (_) async {
+          await pearlsRepository.createPearl(pearl);
+          return this()..add(pearl);
+        },
+      );
+  Future<void> deletePearl(Pearl pearl) async => await pearlsRM.setState(
+        (_) async {
+          await pearlsRepository.deletePearl(pearl.id);
+          return this()..remove(pearl);
+        },
+      );
+  Future<void> updatePearl(Pearl pearl) async {
+    await pearlsRM.setState(
+      (_) async {
+        await pearlsRepository.updatePearl(pearl.id, data: pearl.toJson());
+        return pearlsRepository.getPearls();
+      },
+    );
   }
 }
 
@@ -69,6 +59,16 @@ class Pearl with _$Pearl {
   }) = _Pearl;
 
   factory Pearl.fromJson(json) => _$PearlFromJson(json);
+  // Two static methods to parse a list of CounterModel
+  static List<Pearl> fromListJson(String source) {
+    final List result = json.decode(source) as List;
+    return result.map((e) => Pearl.fromJson(e)).toList();
+  }
+
+  static String toListJson(List<Pearl> pearls) {
+    final List result = pearls.map((e) => e.toJson()).toList();
+    return json.encode(result);
+  }
 }
 
 @freezed

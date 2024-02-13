@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:fcps_pearls/main.dart';
-import 'package:fcps_pearls/manager.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'settings.freezed.dart';
 part 'settings.g.dart';
@@ -13,6 +9,7 @@ class Settings with _$Settings {
     @Default(ThemeMode.system) final ThemeMode themeMode,
     @Default(8) final double borderRadius,
     @Default(8) final double padding,
+    @Default(false) final bool studioMode,
     @Default(Colors.red)
     @MaterialColorConverter()
     final MaterialColor materialColor,
@@ -37,16 +34,35 @@ final class MaterialColorConverter
   int toJson(MaterialColor object) => Colors.primaries.indexOf(object);
 }
 
-final settingsRM = RM.inject(
-  () => const Settings(),
-  persist: () => PersistState(
+final settingsRM = Settings().obs(
+  persistor: (
     key: 'settings',
-    toJson: (s) => jsonEncode(s),
-    fromJson: (json) => Settings.fromJson(jsonDecode(json)),
+    toJson: (s) => s.toJson(),
+    fromJson: Settings.fromJson,
   ),
 );
 Settings get settings => settingsRM.state;
 set settings(Settings _) => settingsRM.state = _;
 
-final themeModeRM = ThemeMode.system.obs;
-final materialColorRM = Colors.amber.obs;
+// final themeModeRM = ThemeMode.system.obs(
+//   persistor: (
+//     key: 'themeMode',
+//     toJson: (state) => {'themeMode': ThemeMode.values.indexOf(state)},
+//     fromJson: (json) => ThemeMode.values[json['themeMode'] as int],
+//   ),
+// );
+// final materialColorRM = Colors.amber.obs(
+//   persistor: (
+//     key: 'materialColor',
+//     toJson: (state) => {'materialColor': Colors.primaries.indexOf(state)},
+//     fromJson: (json) => Colors.primaries[json['materialColor'] as int],
+//   ),
+// );
+// final borderRadiusRM = 8.0.obs();
+// final paddingRM = 8.0.obs(
+//   persistor: (
+//     key: 'padding',
+//     toJson: (state) => {'padding': state},
+//     fromJson: (json) => json['padding'] as double,
+//   ),
+// );

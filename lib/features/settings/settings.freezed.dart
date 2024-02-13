@@ -23,6 +23,7 @@ mixin _$Settings {
   ThemeMode get themeMode => throw _privateConstructorUsedError;
   double get borderRadius => throw _privateConstructorUsedError;
   double get padding => throw _privateConstructorUsedError;
+  bool get studioMode => throw _privateConstructorUsedError;
   @MaterialColorConverter()
   MaterialColor get materialColor => throw _privateConstructorUsedError;
 
@@ -41,6 +42,7 @@ abstract class $SettingsCopyWith<$Res> {
       {ThemeMode themeMode,
       double borderRadius,
       double padding,
+      bool studioMode,
       @MaterialColorConverter() MaterialColor materialColor});
 }
 
@@ -60,6 +62,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
     Object? themeMode = null,
     Object? borderRadius = null,
     Object? padding = null,
+    Object? studioMode = null,
     Object? materialColor = null,
   }) {
     return _then(_value.copyWith(
@@ -75,6 +78,10 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.padding
           : padding // ignore: cast_nullable_to_non_nullable
               as double,
+      studioMode: null == studioMode
+          ? _value.studioMode
+          : studioMode // ignore: cast_nullable_to_non_nullable
+              as bool,
       materialColor: null == materialColor
           ? _value.materialColor
           : materialColor // ignore: cast_nullable_to_non_nullable
@@ -95,6 +102,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
       {ThemeMode themeMode,
       double borderRadius,
       double padding,
+      bool studioMode,
       @MaterialColorConverter() MaterialColor materialColor});
 }
 
@@ -112,6 +120,7 @@ class __$$SettingsImplCopyWithImpl<$Res>
     Object? themeMode = null,
     Object? borderRadius = null,
     Object? padding = null,
+    Object? studioMode = null,
     Object? materialColor = null,
   }) {
     return _then(_$SettingsImpl(
@@ -127,6 +136,10 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.padding
           : padding // ignore: cast_nullable_to_non_nullable
               as double,
+      studioMode: null == studioMode
+          ? _value.studioMode
+          : studioMode // ignore: cast_nullable_to_non_nullable
+              as bool,
       materialColor: null == materialColor
           ? _value.materialColor
           : materialColor // ignore: cast_nullable_to_non_nullable
@@ -142,6 +155,7 @@ class _$SettingsImpl extends _Settings {
       {this.themeMode = ThemeMode.system,
       this.borderRadius = 8,
       this.padding = 8,
+      this.studioMode = false,
       @MaterialColorConverter() this.materialColor = Colors.red})
       : super._();
 
@@ -159,12 +173,15 @@ class _$SettingsImpl extends _Settings {
   final double padding;
   @override
   @JsonKey()
+  final bool studioMode;
+  @override
+  @JsonKey()
   @MaterialColorConverter()
   final MaterialColor materialColor;
 
   @override
   String toString() {
-    return 'Settings(themeMode: $themeMode, borderRadius: $borderRadius, padding: $padding, materialColor: $materialColor)';
+    return 'Settings(themeMode: $themeMode, borderRadius: $borderRadius, padding: $padding, studioMode: $studioMode, materialColor: $materialColor)';
   }
 
   @override
@@ -177,14 +194,16 @@ class _$SettingsImpl extends _Settings {
             (identical(other.borderRadius, borderRadius) ||
                 other.borderRadius == borderRadius) &&
             (identical(other.padding, padding) || other.padding == padding) &&
+            (identical(other.studioMode, studioMode) ||
+                other.studioMode == studioMode) &&
             (identical(other.materialColor, materialColor) ||
                 other.materialColor == materialColor));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, themeMode, borderRadius, padding, materialColor);
+  int get hashCode => Object.hash(
+      runtimeType, themeMode, borderRadius, padding, studioMode, materialColor);
 
   @JsonKey(ignore: true)
   @override
@@ -205,6 +224,7 @@ abstract class _Settings extends Settings {
           {final ThemeMode themeMode,
           final double borderRadius,
           final double padding,
+          final bool studioMode,
           @MaterialColorConverter() final MaterialColor materialColor}) =
       _$SettingsImpl;
   const _Settings._() : super._();
@@ -218,6 +238,8 @@ abstract class _Settings extends Settings {
   double get borderRadius;
   @override
   double get padding;
+  @override
+  bool get studioMode;
   @override
   @MaterialColorConverter()
   MaterialColor get materialColor;

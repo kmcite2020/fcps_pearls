@@ -9,53 +9,71 @@ class PearlDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final PearlManager pearlManager = PearlManager()..call(id);
-    // final Pearl pearl = pearlManager.pearl;
-    return Material(
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-              // title: pearl.id.text(),
+    final pearl = pearlsRM.getPearl(id);
+    // void setPearl(Pearl pearl) => pearlsRM.createPearl(pearl);
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            pearlsPageRM(
+              pearlsPageRM().copyWith(
+                page: PearlPage.pearls,
               ),
-          SliverList.list(
-            children: [
-              // pearl.statement.text(scale: 2).pad(),
-              SizedBox(height: 8),
-              ElevatedButton.icon(
-                onPressed: toggleAnswerShown,
-                icon:
-                    Icon(answerShown ? Icons.visibility_off : Icons.visibility),
-                label:
-                    answerShown ? 'Hide Answer'.text() : 'Show Answer'.text(),
-              ).pad(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              ),
-              // if (answerShown) pearl.answer.text(scale: 2).pad(),
-              ElevatedButton.icon(
-                onPressed: toggleExplainatonShown,
-                icon: Icon(
-                    explainatonShown ? Icons.visibility_off : Icons.visibility),
-                label: explainatonShown
-                    ? 'Hide Explaination'.text()
-                    : 'Show Explaination'.text(),
-              ).pad(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4)),
-              // if (explainatonShown) pearl.explaination.text(scale: 2).pad(),
-            ],
+            );
+          },
+          icon: Icon(Icons.dashboard_sharp),
+        ).pad(),
+        title: pearl.hashCode.text(),
+        actions: [
+          IconButton(
+            onPressed: () {
+              pearlsPageRM(
+                pearlsPageRM().copyWith(page: PearlPage.editPearl, id: id),
+              );
+            },
+            icon: Icon(Icons.edit),
+          ).pad()
+        ],
+      ),
+      body: ListView(
+        children: [
+          pearl.statement.text(scale: 2).pad(),
+          SizedBox(height: 8),
+          ElevatedButton.icon(
+            onPressed: pearl.answer.isEmpty ? null : answerRM.toggle,
+            icon: Icon(
+              answerRM() ? Icons.visibility_off : Icons.visibility,
+            ),
+            label: Row(
+              children: [
+                answerRM() ? 'Hide Answer'.text() : 'Show Answer'.text(),
+              ],
+            ),
+          ).pad(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           ),
+          if (answerRM()) pearl.answer.text(scale: 2).pad(),
+          ElevatedButton.icon(
+            onPressed: pearl.explanation.isEmpty ? null : explanationRM.toggle,
+            icon: Icon(
+              explanationRM() ? Icons.visibility_off : Icons.visibility,
+            ),
+            label: Row(
+              children: [
+                explanationRM()
+                    ? 'Hide Explanation'.text()
+                    : 'Show Explanation'.text(),
+              ],
+            ),
+          ).pad(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          ),
+          if (explanationRM()) pearl.explanation.text(scale: 2).pad(),
         ],
       ),
     );
   }
 
-  static final answerRM = false.inj();
-  static bool get answerShown => answerRM.state;
-  static void toggleAnswerShown() {
-    answerRM.toggle();
-  }
-
-  static final explainatonRM = false.inj();
-  static bool get explainatonShown => explainatonRM.state;
-  static void toggleExplainatonShown() {
-    explainatonRM.toggle();
-  }
+  static final answerRM = false.obs();
+  static final explanationRM = false.obs();
 }

@@ -12,6 +12,7 @@ _$SettingsImpl _$$SettingsImplFromJson(Map<String, dynamic> json) =>
           ThemeMode.system,
       borderRadius: (json['borderRadius'] as num?)?.toDouble() ?? 8,
       padding: (json['padding'] as num?)?.toDouble() ?? 8,
+      studioMode: json['studioMode'] as bool? ?? false,
       materialColor: json['materialColor'] == null
           ? Colors.red
           : const MaterialColorConverter()
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) =>
       'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
       'borderRadius': instance.borderRadius,
       'padding': instance.padding,
+      'studioMode': instance.studioMode,
       'materialColor':
           const MaterialColorConverter().toJson(instance.materialColor),
     };

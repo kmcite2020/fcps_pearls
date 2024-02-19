@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:manager/manager.dart';
+
 import '../../../main.dart';
 import '../authenticated.dart';
 
 part 'pearls.freezed.dart';
 
-class PearlsPage extends StatelessWidget {
+class PearlsPage extends UI {
   const PearlsPage({super.key});
 
   @override
@@ -54,7 +56,7 @@ class PearlsPage extends StatelessWidget {
 
 enum PearlPage { pearls, editPearl, pearlDetails }
 
-final pearlsPageRM = PearlPageState(page: PearlPage.pearls).obs();
+final pearlsPageRM = RM(() => PearlPageState(page: PearlPage.pearls));
 
 @freezed
 class PearlPageState with _$PearlPageState {

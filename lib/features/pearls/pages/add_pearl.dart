@@ -1,7 +1,10 @@
+import 'package:manager/manager.dart';
+
 import '../../../main.dart';
 
-class AddPearlPage extends StatelessWidget {
-  static final pearlRM = RM.inject(Pearl.new);
+class AddPearlPage extends UI {
+  static final dynamic pearlRM;
+  // RM.inject(Pearl.new);
   static Pearl get pearl => pearlRM.state;
   static void setPearl(Pearl _) => pearlRM.state = _;
 
@@ -16,7 +19,7 @@ class AddPearlPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          'Create Pearl'.text(scale: 3).pad(),
+          'Create Pearl'.text(textScaleFactor: 3).pad(),
           TextFormField(
             decoration: InputDecoration(
               labelText: 'Statement',
@@ -56,7 +59,7 @@ class AddPearlPage extends StatelessWidget {
                 }(),
               );
             },
-            child: 'Save Pearl'.text(scale: 2).pad(),
+            child: 'Save Pearl'.text(textScaleFactor: 2).pad(),
           ).pad(),
         ],
       ),

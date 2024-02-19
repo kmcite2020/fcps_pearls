@@ -1,5 +1,5 @@
-import 'package:fcps_pearls/main.dart';
+import 'package:manager/manager.dart';
 
 enum UnAuthenticatedPage { login, register }
 
-final unAuthenticatedPageRM = UnAuthenticatedPage.login.obs();
+final unAuthenticatedPageRM = RM(() => UnAuthenticatedPage.login);

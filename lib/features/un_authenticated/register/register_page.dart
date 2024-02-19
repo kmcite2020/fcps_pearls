@@ -1,9 +1,10 @@
 import 'package:fcps_pearls/features/auth_state.dart';
+import 'package:manager/manager.dart';
+import 'package:manager/state_manager/management/simple.dart';
 
-import '../../../main.dart';
 import '../un_athenticated.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends UI {
   const RegisterPage({super.key});
 
   @override
@@ -16,19 +17,19 @@ class RegisterPage extends StatelessWidget {
         children: [
           TextFormField(
             initialValue: registerUserIDRM(),
-            onChanged: registerEmailRM.onChange,
+            onChanged: registerEmailRM.call,
             decoration: InputDecoration(labelText: 'User ID'),
           ).pad(),
           TextFormField(
             initialValue: registerEmailRM(),
-            onChanged: registerEmailRM.onChange,
+            onChanged: registerEmailRM.call,
             decoration: InputDecoration(labelText: 'Email'),
             validator: validateEmail,
             autovalidateMode: AutovalidateMode.always,
           ).pad(),
           TextFormField(
             initialValue: registerPasswordRM(),
-            onChanged: registerPasswordRM.onChange,
+            onChanged: registerPasswordRM.call,
             decoration: InputDecoration(labelText: 'Password'),
             obscureText: true,
             validator: validatePassword,
@@ -40,7 +41,7 @@ class RegisterPage extends StatelessWidget {
               registerPasswordRM(),
               registerUserIDRM(),
             ),
-            child: 'Register'.text(scale: 2).pad(),
+            child: 'Register'.text(textScaleFactor: 2).pad(),
           ).pad(),
           TextButton(
             onPressed: () => unAuthenticatedPageRM(UnAuthenticatedPage.login),
@@ -52,9 +53,9 @@ class RegisterPage extends StatelessWidget {
   }
 }
 
-final registerEmailRM = ''.obs();
-final registerUserIDRM = ''.obs();
-final registerPasswordRM = ''.obs();
+final registerEmailRM = Simple('');
+final registerUserIDRM = Simple('');
+final registerPasswordRM = Simple('');
 
 String? validatePassword(String? password) {
   if (password!.isEmpty) {

@@ -1,7 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:fcps_pearls/main.dart';
+import 'package:manager/manager.dart';
 
-class AuthErrorUI extends StatelessWidget {
+class AuthErrorUI extends UI {
   const AuthErrorUI({
     Key? key,
     required this.error,
@@ -15,11 +14,11 @@ class AuthErrorUI extends StatelessWidget {
       body: ListView(
         shrinkWrap: true,
         children: [
-          'Errors happened'.text(scale: 2).pad(),
+          'Errors happened'.text(textScaleFactor: 2).pad(),
           // '${loginStateRM().error}'.text(scale: 2).pad(),
           ElevatedButton(
             onPressed: () {},
-            child: 'Try Again'.text(scale: 2).pad(),
+            child: 'Try Again'.text(textScaleFactor: 2).pad(),
           ).pad(),
         ],
       ),

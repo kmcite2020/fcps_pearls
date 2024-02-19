@@ -1,13 +1,15 @@
+import 'package:manager/manager.dart';
 import '../../../main.dart';
 
-class EditPearlPage extends StatelessWidget {
+class EditPearlPage extends UI {
   final String id;
   const EditPearlPage({
     super.key,
     required this.id,
   });
 
-  static final pearlRM = RM.inject<Pearl>(() => throw UnimplementedError());
+  static final dynamic pearlRM;
+  // RM.inject<Pearl>(() => throw UnimplementedError());
   @override
   void didMountWidget(BuildContext context) {
     super.didMountWidget(context);
@@ -78,7 +80,7 @@ class EditPearlPage extends StatelessWidget {
                   },
             child: pearlsRM.loading
                 ? CircularProgressIndicator().pad()
-                : 'Update'.text(scale: 2).pad(),
+                : 'Update'.text(textScaleFactor: 2).pad(),
           ).pad(),
         ],
       ),

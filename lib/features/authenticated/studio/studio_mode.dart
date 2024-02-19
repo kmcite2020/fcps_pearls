@@ -1,7 +1,9 @@
+import 'package:manager/manager.dart';
+
 import '../../../main.dart';
 import '../authenticated.dart';
 
-class StudioModePage extends StatelessWidget {
+class StudioModePage extends UI {
   const StudioModePage({super.key});
 
   @override
@@ -35,13 +37,14 @@ class StudioModePage extends StatelessWidget {
   }
 }
 
-class TabBarViewOfPearls extends StatelessWidget {
+class TabBarViewOfPearls extends UI {
   const TabBarViewOfPearls({super.key});
-  static final _pearlRM = RM.inject<Pearl>(() => throw UnimplementedError());
+  static late final dynamic _pearlRM;
+  //  RM.inject<Pearl>(() => throw UnimplementedError());
   @override
   Widget build(BuildContext context) {
     return TabBarView(
-      children: pearlsRM().map(
+      children: pearlsRM().map<Widget>(
         (_pearl) {
           return _pearlRM.inherited(
             stateOverride: () => _pearl,
@@ -97,10 +100,10 @@ class TabBarViewOfPearls extends StatelessWidget {
                       label: Row(
                         children: [
                           pearl == _pearl
-                              ? "Updated".text(scale: 2).pad()
+                              ? "Updated".text(textScaleFactor: 2).pad()
                               : pearlsRM.loading
-                                  ? 'Updating'.text(scale: 2).pad()
-                                  : 'Update'.text(scale: 2).pad(),
+                                  ? 'Updating'.text(textScaleFactor: 2).pad()
+                                  : 'Update'.text(textScaleFactor: 2).pad(),
                         ],
                       ),
                       icon: Row(

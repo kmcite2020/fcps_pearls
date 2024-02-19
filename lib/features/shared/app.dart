@@ -3,6 +3,8 @@ import 'package:fcps_pearls/features/un_authenticated/login/login_page.dart';
 import 'package:fcps_pearls/features/un_authenticated/register/register_page.dart';
 import 'package:fcps_pearls/features/authenticated/studio/studio_mode.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:manager/manager.dart';
+import 'package:states_rebuilder/scr/state_management/extensions/type_extensions.dart';
 
 import '../../main.dart';
 import '../auth_error/login_error_ui.dart';
@@ -20,12 +22,12 @@ void initialize() async {
     widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
   );
   await directoryRM.initializeState();
-  await RM.storageInitializer(HiveStorage());
+  // await RM.storageInitializer(HiveStorage());
 
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends UI {
   const App({super.key});
 
   @override
@@ -37,7 +39,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: RM.navigate.navigatorKey,
+      navigatorKey: RM.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: FlexThemeData.light(
         useMaterial3: true,

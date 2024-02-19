@@ -1,4 +1,4 @@
-import '../../../main.dart';
+import 'package:manager/manager.dart';
 import '../../auth_state.dart';
 import '../un_athenticated.dart';
 
@@ -32,22 +32,24 @@ bool get isItGoodToLogin =>
         ) ==
         null;
 
-final loginEmailRM = ''.obs(
-  persistor: (
+final loginEmailRM = RM(
+  () => '',
+  persistor: Persistor(
     key: 'loginEmail',
     toJson: (email) => {'data': email},
     fromJson: (json) => json['data'],
   ),
 );
-final loginPasswordRM = ''.obs(
-  persistor: (
+final loginPasswordRM = RM(
+  () => '',
+  persistor: Persistor(
     key: 'loginPassword',
     toJson: (password) => {'data': password},
     fromJson: (json) => json['data'],
   ),
 );
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends UI {
   const LoginPage({Key? key});
 
   @override
@@ -80,7 +82,7 @@ class LoginPage extends StatelessWidget {
                       loginPasswordRM(),
                     )
                 : null,
-            child: 'Login'.text(scale: 2).pad(),
+            child: 'Login'.text(textScaleFactor: 2).pad(),
           ).pad(),
           TextButton(
             onPressed: () =>

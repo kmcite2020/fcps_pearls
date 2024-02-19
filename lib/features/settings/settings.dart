@@ -1,4 +1,5 @@
 import 'package:fcps_pearls/main.dart';
+import 'package:manager/manager.dart';
 
 part 'settings.freezed.dart';
 part 'settings.g.dart';
@@ -19,9 +20,6 @@ class Settings with _$Settings {
       _$SettingsFromJson(json);
 
   const Settings._();
-
-  Settings call([Settings? _settings]) =>
-      _settings != null ? settings = _settings : settings;
 }
 
 final class MaterialColorConverter
@@ -34,15 +32,14 @@ final class MaterialColorConverter
   int toJson(MaterialColor object) => Colors.primaries.indexOf(object);
 }
 
-final settingsRM = Settings().obs(
-  persistor: (
+final settingsRM = RM(
+  () => Settings(),
+  persistor: Persistor(
     key: 'settings',
     toJson: (s) => s.toJson(),
     fromJson: Settings.fromJson,
   ),
 );
-Settings get settings => settingsRM.state;
-set settings(Settings _) => settingsRM.state = _;
 
 // final themeModeRM = ThemeMode.system.obs(
 //   persistor: (

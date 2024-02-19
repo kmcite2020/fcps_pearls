@@ -1,6 +1,8 @@
+import 'package:manager/state_manager/ui/ui.dart';
+
 import '../../../main.dart';
 
-class BackupPage extends StatelessWidget {
+class BackupPage extends UI {
   const BackupPage({super.key});
 
   @override

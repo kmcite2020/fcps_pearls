@@ -1,10 +1,12 @@
+import 'package:manager/manager.dart';
+
 import '../../../main.dart';
 import '../authenticated.dart';
 
 part 'exam_mode.freezed.dart';
 part 'exam_mode.g.dart';
 
-class ExamModePage extends StatelessWidget {
+class ExamModePage extends UI {
   const ExamModePage({super.key});
 
   @override

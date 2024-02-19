@@ -23,6 +23,8 @@ dependencies:
   appwrite: ^11.0.1
   flutter_native_splash: ^2.3.10
   synchronized: ^3.1.0+1
+  manager:
+    git: https://github.com/kmcite2020/manager
 
 dev_dependencies:
   freezed: ^2.4.5

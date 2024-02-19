@@ -1,6 +1,8 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:appwrite/models.dart';
+import 'package:manager/manager.dart';
+import 'package:states_rebuilder/scr/state_management/extensions/type_extensions.dart';
 
 import '../../main.dart';
 
@@ -34,8 +36,9 @@ class AuthState with _$AuthState {
       _$AuthStateFromJson(json);
 }
 
-final authStateRM = AuthState().obs(
-  persistor: (
+final authStateRM = RM(
+  () => AuthState(),
+  persistor: Persistor(
     key: 'auth',
     toJson: (s) => s.toJson(),
     fromJson: AuthState.fromJson,

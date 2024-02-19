@@ -1,8 +1,10 @@
+import 'package:manager/manager.dart';
+
 import '../../../main.dart';
 import '../../auth_state.dart';
 import '../authenticated.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends UI {
   const SettingsPage({super.key});
 
   @override
@@ -53,7 +55,7 @@ class SettingsPage extends StatelessWidget {
           ).pad(),
           ElevatedButton(
             onPressed: () => logout(),
-            child: 'Log Out'.text(scale: 2).pad(),
+            child: 'Log Out'.text(textScaleFactor: 2).pad(),
           ).pad(),
         ],
       ),

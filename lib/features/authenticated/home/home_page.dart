@@ -1,7 +1,7 @@
-import '../../../main.dart';
+import 'package:manager/manager.dart';
 import '../authenticated.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends UI {
   const HomePage({super.key});
 
   @override
@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
             },
             label: Row(
               children: [
-                'Pearls'.text(scale: 2).pad(),
+                'Pearls'.text(textScaleFactor: 2).pad(),
               ],
             ),
           ).pad(),
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
             },
             label: Row(
               children: [
-                'Study Mode'.text(scale: 2).pad(),
+                'Study Mode'.text(textScaleFactor: 2).pad(),
               ],
             ),
           ).pad(),
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
               },
               label: Row(
                 children: [
-                  'Exam Mode'.text(scale: 2).pad(),
+                  'Exam Mode'.text(textScaleFactor: 2).pad(),
                 ],
               ),
             ).pad(),
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
             },
             label: Row(
               children: [
-                'Studio Mode'.text(scale: 2).pad(),
+                'Studio Mode'.text(textScaleFactor: 2).pad(),
               ],
             ),
           ).pad(),
@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
             },
             label: Row(
               children: [
-                'Settings'.text(scale: 2).pad(),
+                'Settings'.text(textScaleFactor: 2).pad(),
               ],
             ),
           ).pad(),

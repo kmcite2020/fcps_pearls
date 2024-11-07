@@ -1,0 +1,10 @@
+class: Pearl
+fields:
+  id: UuidValue
+  statement: String, default =""
+  explaination: String, default = ""
+  created_at: DateTime 
+  answer: String, default = ""
+
+
+  

@@ -1,0 +1,5 @@
+pearls:
+  - getPearls:
+  - addOrUpdatePearl:
+  - deletePearl:
+  - getPearl:

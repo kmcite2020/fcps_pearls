@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/fcps_pearls_client/melos_fcps_pearls_client.iml" filepath="$PROJECT_DIR$/fcps_pearls_client/melos_fcps_pearls_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fcps_pearls_flutter/melos_fcps_pearls_flutter.iml" filepath="$PROJECT_DIR$/fcps_pearls_flutter/melos_fcps_pearls_flutter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fcps_pearls_server/melos_fcps_pearls_server.iml" filepath="$PROJECT_DIR$/fcps_pearls_server/melos_fcps_pearls_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_fcps_pearls.iml" filepath="$PROJECT_DIR$/melos_fcps_pearls.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,8 @@
+name: fcps_pearls
+description: A new Flutter project.
+publish_to: "none"
+environment:
+  sdk: ^3.5.4
+
+dev_dependencies:
+  melos:

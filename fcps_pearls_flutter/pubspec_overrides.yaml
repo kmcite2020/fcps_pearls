@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: fcps_pearls_client
+dependency_overrides:
+  fcps_pearls_client:
+    path: ..\\fcps_pearls_client

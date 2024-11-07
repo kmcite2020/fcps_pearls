@@ -1,0 +1,5 @@
+name: fcps_pearls
+packages:
+  - fcps_pearls_client
+  - fcps_pearls_server
+  - fcps_pearls_flutter
